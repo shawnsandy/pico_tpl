@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A simple templating system for pico that allows you to include html templates in your pico theme(s)
+ * A simple templating(tpl) system for pico that allows you to include html templates in your pico theme(s)
  * @package Pico
  * @subpackage Pico Tpl
  * @since BJ 1.0 TODO
