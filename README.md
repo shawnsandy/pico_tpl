@@ -10,7 +10,7 @@ Installation
 2. Open the pico config.php and insert add and config['tpl_array'] = array('header','content','footer','cover','sidebar') change for your theme.
 3. You can use twig's include function to load tpl(s) `{% include tpl.cover ignore missing %}`
 
-Licence
+License
 -------
 
 ### Released under the MIT license.
