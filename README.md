@@ -1,7 +1,7 @@
 pico_tpl
 ========
 
-A simple dynamic templating(tpl) system for pico that allows you to include .html template sections in your pico theme(s).
+A simple templating(tpl) system for pico that allows you to include dynamic html-templates to section of your pico theme.
 
 Installation
 ------------
