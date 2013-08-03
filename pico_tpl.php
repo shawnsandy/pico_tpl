@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A simple templating(tpl) system for pico that allows you to include html templates in your pico theme(s)
+ * A simple templating(tpl) system for pico that allows you to include dynamic page / section templates in your pico theme(s)
  * @package Pico
  * @subpackage Pico Tpl
  * @since BJ 1.0 TODO
@@ -12,7 +12,7 @@ class Pico_Tpl {
 
     private $tpl_name,
             $theme = 'default',
-            $tpl_array = array('header','footer','cover','sidebar');
+            $tpl_array = array('header','content','footer','cover','sidebar');
 
     public function __construct() {
 
@@ -37,15 +37,25 @@ class Pico_Tpl {
 
     }
 
+
+    public function file_meta(&$meta) {
+
+        $config = $meta;
+        if(isset($config['slug']))
+            $this->tpl_name = strtolower ($config['tpl']);
+
+    }
+
     public function before_render(&$twig_vars, &$twig) {
 
         foreach ($this->tpl_array as $value) {
-            $tpl[$value] = 'tpl/tpl-'.$value.'.html';
-            if(file_exists(THEMES_DIR.$this->theme.'/tpl/tpl-'.$this->tpl_name.'-'.$value.'.html'))
-            $tpl[$value] = 'tpl/tpl-'.$this->tpl_name.'-'.$value.'.html';
+            $tpl[$value] = 'tpl/'.$value.'.html';
+            if(file_exists(THEMES_DIR.$this->theme.'/tpl/'.$this->tpl_name.'-'.$value.'.html'))
+            $tpl[$value] = 'tpl/'.$this->tpl_name.'-'.$value.'.html';
         }
        // var_dump($page_tpl);
        $twig_vars['tpl'] = $tpl ;
+
     }
 
 }
