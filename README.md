@@ -15,7 +15,7 @@ Installation
 
 Samples
 -------
-Coming soon...
+https://gist.github.com/shawnsandy/6150969
 
 License
 -------
