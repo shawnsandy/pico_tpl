@@ -13,6 +13,64 @@ Installation
 5. Create a tpl folder in your theme folder and add you content.html files to it
 6. Views -- you can create place reusable html twig snippets in the views folder add `{% include views.filename ignore missing %}` to you theme, and you have a simple way to re-use html files.
 
+Samples
+-------
+
+###Section TPL
+
+`
+<pre>
+<!--
+TODO The TPL description
+-->
+<section id="cover" class="cover fold">
+<div class="container v-align">
+    <div class="row">
+        <!-- CLASS -->
+        <div class="col-4">
+            <h1 class="mast-header"> {{ meta.title }} </h1>
+            <p class="fixie default-text"></p>
+        </div>
+        <div class="col-8">
+            <figure>
+             <img src="http://lorempixel.com/720/360/technics" />
+            </figure>
+
+        </div>
+    </div>
+    <!-- container -->
+</div>
+</section>
+<section id="features">
+    <div class="container">
+        <div class="row sub-headlines default-text">
+            <div class="col-4">
+                <h1 class="fixie">Header</h1>
+                <p class="fixie"></p>
+            </div>
+            <div class="col-4">
+                <h1 class="fixie">Header</h1>
+                <p class="fixie"></p>
+            </div>
+            <div class="col-4">
+                <h1 class="fixie">Header</h1>
+                <p class="fixie"></p>
+            </div>
+        </div>
+        <!-- ******end - row****** -->
+        <!-- container -->
+    </div>
+</section>
+</pre>
+`
+
+### Sample View
+`
+<pre>
+<div>Meta desctiption: {{ meta.description }}</div>
+</pre
+`
+
 License
 -------
 
