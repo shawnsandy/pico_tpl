@@ -1,14 +1,17 @@
 pico_tpl
 ========
 
-A simple templating(tpl) system for pico that allows you to include dynamic html-templates to predefined sections of your pico theme.
+A simple templating(tpl) system for pico that allows you to include dynamic twig html-templates / views to predefined sections of your pico theme.
 
 Installation
 ------------
 
 1. Copy the plugin file/folder the plugins directory of your Pico site.
 2. Open the pico config.php and insert add and config['tpl_array'] = array('header','content','footer','cover','sidebar') change for your theme.
-3. You can use twig's include function to load tpl(s) `{% include tpl.cover ignore missing %}`
+3. Create a tpl folder in your theme folder and add you content.html files to it.
+4. You can use twig's include function to load tpl(s) `{% include tpl.content ignore missing %}` the plugin will load your pagename-content.html or content.html if that file does not exist, missing files are simple ignored
+5. Create a tpl folder in your theme folder and add you content.html files to it
+6. Views -- you can create place reusable html twig snippets in the views folder add `{% include views.filename ignore missing %}` to you theme, and you have a simple way to re-use html files.
 
 License
 -------
