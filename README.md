@@ -17,6 +17,7 @@ Samples
 -------
 
 ###Section TPL
+--------------
 
 `
 <pre>
@@ -65,6 +66,8 @@ TODO The TPL description
 `
 
 ### Sample View
+---------------
+
 `
 <pre>
 <div>Meta desctiption: {{ meta.description }}</div>
