@@ -14,7 +14,7 @@ class Pico_Tpl {
             $tpl_array = array('header', 'content', 'footer', 'cover', 'sidebar');
 
     public function __construct() {
-
+        
     }
 
     public function before_load_content(&$file) {
@@ -50,7 +50,6 @@ class Pico_Tpl {
         $views = $this->get_views();
         $twig_vars['views'] = $views;
         //var_dump($views);
-
     }
 
     private function get_tpl() {
@@ -58,7 +57,7 @@ class Pico_Tpl {
         foreach ($this->tpl_array as $value) {
             $tpl[$value] = 'tpl/' . $value . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html'))
-                $tpl[$value] = 'tpl/' . $this->tpl_name . '-' . $value . '.html';
+                $tpl[$value] = 'tpl/' . $this->tpl_name . '_' . $value . '.html';
         }
         return $tpl;
     }
@@ -69,14 +68,15 @@ class Pico_Tpl {
         $views = $this->get_files($view_dir);
 
         foreach ($views as $key) {
-            $view[$key] = 'tpl/views/'. $key.'.html';
+            $view[$key] = 'tpl/views/' . $key . '.html';
+            if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
+                $view['key'] = 'tpl/views/' . $this->tpl_name . '_' . $key . '.html';
         }
         //var_dump($views);
-        if(!isset($view))
+        if (!isset($view))
             return array(0);
 
         return $view;
-
     }
 
     // pico.php lib
@@ -91,7 +91,6 @@ class Pico_Tpl {
                 $file = $directory . "/" . $file;
                 if (!$ext || strstr($file, $ext))
                 //$array_items[] = preg_replace("/\/\//si", "/", $file);
-
                     $array_items[] = basename($file, $ext);
             }
             closedir($handle);
