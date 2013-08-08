@@ -14,7 +14,7 @@ class Pico_Tpl {
             $tpl_array = array('header', 'content', 'footer', 'cover', 'sidebar');
 
     public function __construct() {
-        
+
     }
 
     public function before_load_content(&$file) {
@@ -23,7 +23,6 @@ class Pico_Tpl {
 
         $this->tpl_name = basename($file, '.md');
 
-        //$filepath = dirname($file);
     }
 
     public function config_loaded(&$settings) {
@@ -57,7 +56,7 @@ class Pico_Tpl {
         foreach ($this->tpl_array as $value) {
             $tpl[$value] = 'tpl/' . $value . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html'))
-                $tpl[$value] = 'tpl/' . $this->tpl_name . '_' . $value . '.html';
+                $tpl[$value] = 'tpl/' . $this->tpl_name . '-' . $value . '.html';
         }
         return $tpl;
     }
