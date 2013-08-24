@@ -20,7 +20,6 @@ class Pico_Tpl {
     public function before_load_content(&$file) {
 
         // var_dump($file);
-
         $this->tpl_name = basename($file, '.md');
 
     }
@@ -37,12 +36,16 @@ class Pico_Tpl {
     public function file_meta(&$meta) {
 
         $config = $meta;
-        if (isset($config['slug']))
-            $this->tpl_name = strtolower($config['tpl']);
+        if (isset($config['slug'])):
+          $this->tpl_name = strtolower($config['slug']);
+        endif;
+
+       //var_dump($config);
     }
 
     public function before_render(&$twig_vars, &$twig) {
 
+        $this->tpl_name;
         // var_dump($page_tpl);
         $twig_vars['tpl'] = $this->get_tpl();
 
@@ -65,11 +68,11 @@ class Pico_Tpl {
 
         $view_dir = $this->theme . '/tpl/views';
         $views = $this->get_files($view_dir);
-
+        if(empty($views)) return;
         foreach ($views as $key) {
             $view[$key] = 'tpl/views/' . $key . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
-                $view['key'] = 'tpl/views/' . $this->tpl_name . '_' . $key . '.html';
+                $view['key'] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
         }
         //var_dump($views);
         if (!isset($view))
