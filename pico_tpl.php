@@ -21,7 +21,6 @@ class Pico_Tpl {
 
         // var_dump($file);
         $this->tpl_name = basename($file, '.md');
-
     }
 
     public function config_loaded(&$settings) {
@@ -37,10 +36,10 @@ class Pico_Tpl {
 
         $config = $meta;
         if (isset($config['slug'])):
-          $this->tpl_name = strtolower($config['slug']);
+            $this->tpl_name = strtolower($config['slug']);
         endif;
 
-       //var_dump($config);
+        //var_dump($this->tpl_name);
     }
 
     public function before_render(&$twig_vars, &$twig) {
@@ -58,9 +57,13 @@ class Pico_Tpl {
 
         foreach ($this->tpl_array as $value) {
             $tpl[$value] = 'tpl/' . $value . '.html';
-            if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html'))
-                $tpl[$value] = 'tpl/' . $this->tpl_name . '-' . $value . '.html';
+            $page_tpl = $this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html';
+            if (file_exists($page_tpl))
+                $tpl[$value] = '/tpl/' . $this->tpl_name . '-' . $value . '.html';
+            //var_dump($page_tpl);
         }
+
+        //var_dump($tpl);
         return $tpl;
     }
 
@@ -68,7 +71,8 @@ class Pico_Tpl {
 
         $view_dir = $this->theme . '/tpl/views';
         $views = $this->get_files($view_dir);
-        if(empty($views)) return;
+        if (empty($views))
+            return;
         foreach ($views as $key) {
             $view[$key] = 'tpl/views/' . $key . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
