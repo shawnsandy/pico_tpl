@@ -1,7 +1,7 @@
 pico_tpl
 ========
 
-A simple templating(tpl) system for pico that allows you to include twig html-templates as dynamic sections or resuable views to your pico themes.
+A simple dynamic content system for pico template that allows you to include html /.md files specfically created for use in theme in your pico theme(s)
 
 Installation
 ------------
