@@ -1,12 +1,13 @@
 <?php
 
 /**
- * A simple dynamic template content system for pico that allows you to include dynamic page / section html templates in your pico theme(s)
+ * A simple dynamic content system for pico template that allows you to include html /.md files specfically created for use in theme in your pico theme(s)
  * @package Pico TPL content
  * @subpackage Pico Tpl
  * @since BJ 1.0 TODO
  * @author Shawn Sandy <shawnsandy04@gmail.com>
  */
+
 class Pico_Tpl {
 
     private $tpl_name,
@@ -56,7 +57,7 @@ class Pico_Tpl {
         // theme/content/file
         $theme = $this->get_theme_content();
         $twig_vars['theme'] = $theme;
-        var_dump($twig_vars['theme']);
+        //var_dump($twig_vars['theme']);
 
 
     }
