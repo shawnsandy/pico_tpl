@@ -1,8 +1,8 @@
 <?php
 
 /**
- * A simple templating(tpl) system for pico that allows you to include dynamic page / section html templates in your pico theme(s)
- * @package Pico
+ * A simple dynamic template content system for pico that allows you to include dynamic page / section html templates in your pico theme(s)
+ * @package Pico TPL content
  * @subpackage Pico Tpl
  * @since BJ 1.0 TODO
  * @author Shawn Sandy <shawnsandy04@gmail.com>
@@ -44,13 +44,21 @@ class Pico_Tpl {
 
     public function before_render(&$twig_vars, &$twig) {
 
-        $this->tpl_name;
-        // var_dump($page_tpl);
+
+
+        // theme/tpl/file
         $twig_vars['tpl'] = $this->get_tpl();
 
+        // theme/tpl/views/file
         $views = $this->get_views();
         $twig_vars['views'] = $views;
-        //var_dump($views);
+
+        // theme/content/file
+        $theme = $this->get_theme_content();
+        $twig_vars['theme'] = $theme;
+        var_dump($twig_vars['theme']);
+
+
     }
 
     private function get_tpl() {
@@ -65,6 +73,22 @@ class Pico_Tpl {
 
         //var_dump($tpl);
         return $tpl;
+    }
+
+    private  function get_theme_content(){
+        $content = $this->get_files($this->theme.'/content', '.md');
+        $content_data = array();
+        if(empty($content))
+            return;
+        foreach ($content as $key) {
+            $file = $this->theme.'/content/'.$key.'.md';
+            $pattern = array('/ /','/-/');
+            $title = preg_replace($pattern, '_', strtolower($key));
+            $data = file_get_contents($file);
+            $content_data[$title] = \Michelf\MarkdownExtra::defaultTransform($data);
+
+        }
+         return $content_data;
     }
 
     private function get_views() {
