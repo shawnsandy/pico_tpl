@@ -62,7 +62,7 @@ class Pico_Tpl {
     private function get_tpl() {
 
         foreach ($this->tpl_array as $value) {
-            $pattern = array('/ /', '/-/');
+            $pattern = array('/ /', '/_/');
             $name = preg_replace($pattern, '_', $value);
             $tpl[$name] = 'tpl/' . $value . '.html';
             $page_tpl = $this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html';
@@ -98,12 +98,12 @@ class Pico_Tpl {
             return;
         $pattern = array('/ /', '/-/');
         foreach ($views as $key) {
-            $name = preg_replace($pattern, '-', $key);
+            $name = preg_replace($pattern, '_', $key);
             $view[$name] = 'tpl/views/' . $key . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
-                $view['name'] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
+                $view[$name] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
         }
-        //var_dump($views);
+        var_dump($view);
         if (!isset($view))
             return array(0);
 
