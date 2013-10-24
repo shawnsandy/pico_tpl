@@ -7,7 +7,6 @@
  * @since BJ 1.0 TODO
  * @author Shawn Sandy <shawnsandy04@gmail.com>
  */
-
 class Pico_Tpl {
 
     private $tpl_name,
@@ -58,17 +57,17 @@ class Pico_Tpl {
         $theme = $this->get_theme_content();
         $twig_vars['theme'] = $theme;
         //var_dump($twig_vars['theme']);
-
-
     }
 
     private function get_tpl() {
 
         foreach ($this->tpl_array as $value) {
-            $tpl[$value] = 'tpl/' . $value . '.html';
+            $pattern = array('/ /', '/_/');
+            $name = preg_replace($pattern, '_', $value);
+            $tpl[$name] = 'tpl/' . $value . '.html';
             $page_tpl = $this->theme . '/tpl/' . $this->tpl_name . '-' . $value . '.html';
             if (file_exists($page_tpl))
-                $tpl[$value] = '/tpl/' . $this->tpl_name . '-' . $value . '.html';
+                $tpl[$name] = '/tpl/' . $this->tpl_name . '-' . $value . '.html';
             //var_dump($page_tpl);
         }
 
@@ -76,20 +75,19 @@ class Pico_Tpl {
         return $tpl;
     }
 
-    private  function get_theme_content(){
-        $content = $this->get_files($this->theme.'/content', '.md');
+    private function get_theme_content() {
+        $content = $this->get_files($this->theme . '/content', '.md');
         $content_data = array();
-        if(empty($content))
+        if (empty($content))
             return;
         foreach ($content as $key) {
-            $file = $this->theme.'/content/'.$key.'.md';
-            $pattern = array('/ /','/-/');
+            $file = $this->theme . '/content/' . $key . '.md';
+            $pattern = array('/ /', '/-/');
             $title = preg_replace($pattern, '_', strtolower($key));
             $data = file_get_contents($file);
             $content_data[$title] = \Michelf\MarkdownExtra::defaultTransform($data);
-
         }
-         return $content_data;
+        return $content_data;
     }
 
     private function get_views() {
@@ -98,12 +96,14 @@ class Pico_Tpl {
         $views = $this->get_files($view_dir);
         if (empty($views))
             return;
+        $pattern = array('/ /', '/-/');
         foreach ($views as $key) {
-            $view[$key] = 'tpl/views/' . $key . '.html';
+            $name = preg_replace($pattern, '_', $key);
+            $view[$name] = 'tpl/views/' . $key . '.html';
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
-                $view['key'] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
+                $view[$name] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
         }
-        //var_dump($views);
+        var_dump($view);
         if (!isset($view))
             return array(0);
 
