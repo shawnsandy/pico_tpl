@@ -103,7 +103,7 @@ class Pico_Tpl {
             if (file_exists($this->theme . '/tpl/' . $this->tpl_name . '-' . $key . '.html'))
                 $view[$name] = 'tpl/views/' . $this->tpl_name . '-' . $key . '.html';
         }
-        var_dump($view);
+       //var_dump($view);
         if (!isset($view))
             return array(0);
 
